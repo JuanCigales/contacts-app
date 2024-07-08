@@ -1,12 +1,13 @@
 <?php
 
-$contacts = [
-  ["name" => "Pepe", "phone_number" => "2132139"],
-  ["name" => "Antonio", "phone_number" => "98239"],
-  ["name" => "Nate", "phone_number" => "329847"],
-];
+if (file_exists("contacts.json")) {
+  $contacts = json_decode(file_get_contents("contacts.json"), true);
+} else {
+  $contacts = [];
+}
 
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -59,7 +60,7 @@ $contacts = [
             <a class="nav-link" href="#">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="./add.html">Add Contact</a>
+            <a class="nav-link" href="add.php">Add Contact</a>
           </li>
         </ul>
       </div>
@@ -69,18 +70,28 @@ $contacts = [
   <main>
     <div class="container pt-4 p-3">
       <div class="row">
-        <?php foreach($contacts as $contact){?>
+        
+        <?php if (count($contacts) == 0): ?>
+          <div class="col-md-4 mx-auto">
+            <div class="card card-body text-center">
+              <p>No contacts saved yet</p>
+              <a href="add.php">Add One!</a>
+            </div>
+          </div>
+        <?php endif ?>
+        <?php foreach ($contacts as $contact): ?>
           <div class="col-md-4 mb-3">
             <div class="card text-center">
               <div class="card-body">
-                <h3 class="card-title text-capitalize"><?= $contact["name"]?></h3>
-                <p class="m-2"><?= $contact["phone_number"]?></p>
+                <h3 class="card-title text-capitalize"><?= $contact["name"] ?></h3>
+                <p class="m-2"><?= $contact["phone_number"] ?></p>
                 <a href="#" class="btn btn-secondary mb-2">Edit Contact</a>
                 <a href="#" class="btn btn-danger mb-2">Delete Contact</a>
               </div>
             </div>
           </div>
-        <?php } ?>
+        <?php endforeach ?>
+
       </div>
     </div>
   </main>
