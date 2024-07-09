@@ -5,27 +5,26 @@
   $error = null;
 
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (empty($_POST["name"]) || empty($_POST["phone_number"])){
-      $error = "The fields must be all filled.";
-    }
-    else if (strlen($_POST["phone_number"]) < 9){
-      $error = "The phone number must be at least 9 characters.";
-    }
-    else{
+    if (empty($_POST["name"]) || empty($_POST["phone_number"])) {
+      $error = "Please fill all the fields.";
+    } else if (strlen($_POST["phone_number"]) < 9) {
+      $error = "Phone number must be at least 9 characters.";
+    } else {
       $name = $_POST["name"];
       $phoneNumber = $_POST["phone_number"];
 
-      $statement = $conn->prepare("INSERT INTO contacts (name, phone_number) VALUES (:name, :phoneNumber)");
+      $statement = $conn->prepare("INSERT INTO contacts (name, phone_number) VALUES (:name, :phone_number)");
       $statement->bindParam(":name", $_POST["name"]);
-      $statement->bindParam(":phoneNumber", $_POST["phone_number"]);
+      $statement->bindParam(":phone_number", $_POST["phone_number"]);
       $statement->execute();
-      
-      header("Location: index.php");
+
+      header("Location: home.php");
     }
   }
 ?>
 
 <?php require "partials/header.php" ?>
+
 <div class="container pt-5">
   <div class="row justify-content-center">
     <div class="col-md-8">
@@ -65,4 +64,5 @@
     </div>
   </div>
 </div>
+
 <?php require "partials/footer.php" ?>

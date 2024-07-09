@@ -22,11 +22,15 @@
 
   <!-- Static Content -->
   <link rel="stylesheet" href="./static/css/index.css" />
+  <?php $uri = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH) ?>
+  <?php if ($uri == "/contact-apps/" || $uri == "/contact-apps/index.php"): ?>
+    <script defer src="./static/js/welcome.js"></script>
+  <?php endif ?>
 
   <title>Contacts App</title>
 </head>
 <body>
-    <?php require "navbar.php" ?>
-    <main>
+  <?php require "navbar.php" ?>
 
-<!--content here-->
+  <main>
+    <!-- Content Here -->

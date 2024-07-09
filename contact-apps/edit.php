@@ -33,12 +33,13 @@
         ":phone_number" => $_POST["phone_number"],
       ]);
 
-      header("Location: index.php");
+      header("Location: home.php");
     }
   }
 ?>
 
 <?php require "partials/header.php" ?>
+
 <div class="container pt-5">
   <div class="row justify-content-center">
     <div class="col-md-8">
@@ -78,4 +79,5 @@
     </div>
   </div>
 </div>
+
 <?php require "partials/footer.php" ?>
